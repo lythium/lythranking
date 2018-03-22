@@ -23,7 +23,7 @@ class LythRanking
         $this->plugin               = new stdClass;
         $this->plugin->name         = 'lythframe'; // Plugin Folder
         $this->plugin->displayName  = 'LythFrame'; // Plugin Name
-        $this->plugin->version      = '1.0.0';
+        $this->plugin->version      = '1.0.1';
         $this->plugin->folder       = plugin_dir_path(__FILE__);
         $this->plugin->url          = plugin_dir_url(__FILE__);
 
@@ -48,17 +48,19 @@ class LythRanking
     {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
+        $lythRanking_category = $wpdb->prefix . 'lythranking_category';
+        $lythRanking = $wpdb->prefix . 'lythranking';
 
-        $sql_lythRanking = "CREATE TABLE {$wpdb->prefix}lythranking-category (
-            id mediumint(9) NOT NULL AUTO_INCREMENT,
+        $sql_lythRanking_category = "CREATE TABLE $lythRanking_category (
+            id_category mediumint(9) NOT NULL AUTO_INCREMENT,
             name varchar(255) NOT NULL,
             parent varchar(255) DEFAULT NULL,
             position int(5) NOT NULL,
-            UNIQUE KEY  (id)
+            UNIQUE KEY  (id_category)
         ) $charset_collate;";
 
-        $sql_lythRanking &= "CREATE TABLE {$wpdb->prefix}lythranking (
-            id mediumint(9) NOT NULL AUTO_INCREMENT,
+        $sql_lythRanking = "CREATE TABLE $lythRanking (
+            id_rank mediumint(9) NOT NULL AUTO_INCREMENT,
             unit_rank int(5) NOT NULL,
             unit_name varchar(255) NOT NULL,
             category int(5) NOT NULL,
@@ -66,16 +68,22 @@ class LythRanking
             url_post varchar(255) DEFAULT '0' NOT NULL,
             positive_details varchar(255) NOT NULL,
             negative_details varchar(255) DEFAULT '',
-            UNIQUE KEY  (id)
+            UNIQUE KEY  (id_rank)
         ) $charset_collate;";
 
         require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-        dbDelta($sql_lythFrame);
+        dbDelta($sql_lythRanking_category);
+        dbDelta($sql_lythRanking);
     }
 
     static function lythranking_uninstall()
     {
         global $wpdb;
+        $lythRanking_category = $wpdb->prefix . 'lythranking_category';
+        $lythRanking = $wpdb->prefix . 'lythranking';
+
+        $wpdb->query("DROP TABLE IF EXISTS $lythRanking_category");
+        $wpdb->query("DROP TABLE IF EXISTS $lythRanking");
 
     }
 
@@ -157,12 +165,13 @@ class LythRanking
     static function lythRankingList()
     {
         // Load List
-        include_once(WP_PLUGIN_DIR.'/lythframe/views/admin/list-ranking.php');
+        include_once(WP_PLUGIN_DIR.'/lythranking/views/backoff/list-ranking.php');
     }
 
     static function lythRankingAddCategory()
     {
         // Load add Form
-        include_once(WP_PLUGIN_DIR.'/lythframe/views/admin/add-category.php');
+        include_once(WP_PLUGIN_DIR.'/lythranking/views/backoff/add-category.php');
     }
 }
+new LythRanking();

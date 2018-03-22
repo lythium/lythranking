@@ -2,7 +2,7 @@
  /**
  *
  */
-class LythFrameTools
+class LythTools
 {
     public static function isNumeric($value)
     {
