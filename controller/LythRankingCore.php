@@ -36,6 +36,17 @@ class LythRankingCore
 
         return false;
     }
+    public static function getListCategory()
+    {
+        global $wpdb;
+        $lythRanking_category = $wpdb->prefix . 'lythranking_category';
+
+        $results = $wpdb->get_results("SELECT * FROM $lythRanking_category ORDER BY id_category ASC", OBJECT);
+        if (!$results) {
+            $results = false;
+        }
+        return $results;
+    }
     public static function getListFront()
     {
         global $wpdb;

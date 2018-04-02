@@ -15,7 +15,7 @@
         </div>
     </div>
     <span>Shortcode : <strong>[Lythranking]</strong></span>
-    <div class="separator" style="display:block;margin-top:40px;">
+    <div class="separator" style="display:block;margin-top:40px;"></div>
     <h3>List Category</h3>
     <table id="lythranking-list" class="wp-list-table widefat fixed striped pages">
         <thead>
@@ -32,7 +32,7 @@
            <?php if ($results): ?>
            <?php else: ?>
                <tr class="no-items">
-                   <td class="colspanchange" colspan="5">Sorry, No ranking</td>
+                   <td class="colspanchange" colspan="5">Sorry, No rank Category</td>
                </tr>
            <?php endif; ?>
         </tbody>
@@ -42,7 +42,7 @@
             </tr>
         </tfoot>
     </table>
-    <div class="separator" style="display:block;margin-top:40px;">
+    <div class="separator" style="display:block;margin-top:40px;"></div>
 
 
     <h3>List Ranking</h3>

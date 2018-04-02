@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+#two-column {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+#first-col,
+#second-col {
+    border: 2px solid #444444;
+    background-color: #c5c5c5;
+    border-radius: 5px;
+}
+#first-col {
+    width: 55%;
+}
+#second-col {
+    width:40%;
+}
