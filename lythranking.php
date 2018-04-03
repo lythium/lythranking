@@ -41,6 +41,13 @@ class LythRanking
 
         include_once plugin_dir_path(__FILE__).'controller/LythRankingCore.php';
         new LythRankingCore();
+
+        include_once plugin_dir_path(__FILE__).'class/LythRankingSettingsCategory.php';
+        new LythRankingSettingsCategory();
+
+        include_once plugin_dir_path(__FILE__).'class/LythRankingSettings.php';
+        new LythRankingSettings();
+
         //Create on install
         register_activation_hook(__FILE__, array(__CLASS__, 'lythranking_install' ));
 
