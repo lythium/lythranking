@@ -110,7 +110,25 @@ div.alert-error {
     color: #000000;
     border: 2px solid #cccccc;
 }
-#add-category button:hover {
+#add-category button:hover,
+#category-list #delete_btn:hover,
+#category-list #update_btn:hover {
     border: 2px inset lightblue;
     background-color: #e7e7e7;
+}
+#category-list th {
+    text-align: center;
+}
+#category-list #delete_btn,
+#category-list #update_btn {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align: center;
+    height: 30px;
+    font-weight: 700;
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #cccccc;
 }

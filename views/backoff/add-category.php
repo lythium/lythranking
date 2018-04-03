@@ -33,13 +33,12 @@
                 <div class="group-form-horizontal">
                     <label for="parent">Catégory parent</label>
                     <select class="" name="parent">
-                        <?php $results = LythRankingCore::getChildrenCategory(); ?>
+                        <?php $results = LythRankingCore::getCategoryParent(); ?>
                         <?php if ($results): ?>
-                            <?php foreach ($results as $cat): ?>
-                                <option value="<?php echo $cat["id_category"] ?>"><?php echo $cat["name"] ?></option>
-                            <?php endforeach; ?>
-                        <?php else: ?>
                             <option value="0">No Category</option>
+                            <?php foreach ($results as $cat): ?>
+                                <option value="<?php echo $cat->id_category ?>"><?php echo $cat->name ?></option>
+                            <?php endforeach; ?>
                         <?php endif; ?>
                     </select>
                 </div>
@@ -60,9 +59,33 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <?php $results = LythRankingCore::getCategoryParent(); ?>
-                        <?php if ($results): ?>
-
+                        <?php $objects = LythRankingCore::getCategoryParent(); ?>
+                        <?php if ($objects): ?>
+                            <?php foreach ($objects as $obj): ?>
+                                <tr>
+                                    <th>
+                                        <span><?php echo $obj->id_category ?></span>
+                                    </th>
+                                    <th>
+                                        <span><?php echo $obj->name ?></span>
+                                    </th>
+                                    <th>
+                                        <span></span>
+                                    </th>
+                                    <th>
+                                        <span><?php echo $obj->position ?></span>
+                                    </th>
+                                    <th>
+                                        <form  action="<?= admin_url('admin.php') ?>" method="GET">
+                                            <input type="hidden" name="page" value="lythrankingaddcategory">
+                                            <input type="hidden" name="id_category" value="<?php echo $obj->id_category ?>">
+                                            <button id="delete_btn" type="submit" class="btn btn-info" name="button" value="delete"></i><span class="icon_text">Delete</span></button>
+                                            <br>
+                                            <button id="update_btn" type="submit" class="btn btn-info" name="button" value="update"></i><span class="icon_text">Update</span></button>
+                                        </form>
+                                    </th>
+                                </tr>
+                            <?php endforeach;?>
                         <?php else: ?>
                             <tr class="no-items">
                                 <td class="colspanchange" colspan="5">Sorry, No rank Category</td>
