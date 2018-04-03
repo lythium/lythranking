@@ -85,7 +85,7 @@ class LythRankingCore
         global $wpdb;
         $lythRanking_category = $wpdb->prefix . 'lythranking_category';
 
-        $results = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE parent = 'NULL' ORDER BY id_category ASC", OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE parent = 0 ORDER BY id_category ASC", OBJECT);
         if (!$results) {
             $results = false;
         }
@@ -97,7 +97,7 @@ class LythRankingCore
         global $wpdb;
         $lythRanking_category = $wpdb->prefix . 'lythranking_category';
 
-        $results = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE parent != 'NULL' ORDER BY id_category ASC", OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE parent != 0 ORDER BY id_category ASC", OBJECT);
         if (!$results) {
             $results = false;
         }
