@@ -17,43 +17,65 @@
     <div class="separator" style="display:block;margin-top:40px;"></div>
     <h3>Category</h3>
     <div id="two-column">
-        <section id="first-col">
-            <table id="category-list" class="wp-list-table widefat fixed striped pages">
-                <thead>
-                    <tr>
-                        <th scope="col" id="field_0" class="manage-column column-cb id-column">ID</th>
-                        <th scope="col" id="field_1" class="manage-column column-title column-primary column-fields">Category Name</th>
-                        <th scope="col" id="field_2" class="manage-column column-fields">Parent</th>
-                        <th scope="col" id="field_3" class="manage-column column-fields">Position</th>
-                        <th scope="col" id="field_4" class="manage-column column-fields">Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                   <?php $results = LythRankingCore::getListCategory(); ?>
-                   <?php if ($results): ?>
-                   <?php else: ?>
-                       <tr class="no-items">
-                           <td class="colspanchange" colspan="5">Sorry, No rank Category</td>
-                       </tr>
-                   <?php endif; ?>
-                </tbody>
-                <tfoot>
-                    <tr class="no-items">
-                        <td class="colspanchange" colspan="5"> </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </section>
-        <section id="second-col">
-            <form id="add-category" action="" method="post">
-                <div class="group-form">
-                    <label for="name">Name</label>
-                    <input type="text" name="name" value="">
-                </div>
-                <div class="group-form">
 
+        <section id="first-col">
+            <form id="add-category">
+                <div class="group-form-horizontal">
+                    <div class="group-form">
+                        <label for="name">Name</label>
+                        <input type="text" name="name" value="">
+                    </div>
+                    <div class="group-form">
+                        <label for="position">Position</label>
+                        <input type="text" name="position" value="0" pattern="[0-9]">
+                    </div>
                 </div>
+                <div class="group-form-horizontal">
+                    <label for="parent">Catégory parent</label>
+                    <select class="" name="parent">
+                        <?php $results = LythRankingCore::getChildrenCategory(); ?>
+                        <?php if ($results): ?>
+                            <?php foreach ($results as $cat): ?>
+                                <option value="<?php echo $cat["id_category"] ?>"><?php echo $cat["name"] ?></option>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <option value="0">No Category</option>
+                        <?php endif; ?>
+                    </select>
+                </div>
+                <button type="submit" name="button" value="add"><i class="icon-spin5 animate-spin"></i><span class="icon_text">Add</span></button>
             </form>
+        </section>
+
+        <section id="second-col">
+            <div>
+                <table id="category-list" class="wp-list-table widefat fixed striped pages">
+                    <thead>
+                        <tr>
+                            <th scope="col" id="field_0" class="manage-column column-cb id-column">ID</th>
+                            <th scope="col" id="field_1" class="manage-column column-title column-primary column-fields">Category Name</th>
+                            <th scope="col" id="field_2" class="manage-column column-fields">Parent</th>
+                            <th scope="col" id="field_3" class="manage-column column-fields">Position</th>
+                            <th scope="col" id="field_4" class="manage-column column-fields">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $results = LythRankingCore::getCategoryParent(); ?>
+                        <?php if ($results): ?>
+
+                        <?php else: ?>
+                            <tr class="no-items">
+                                <td class="colspanchange" colspan="5">Sorry, No rank Category</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                    <tfoot>
+                        <tr class="no-items">
+                            <td class="colspanchange" colspan="5"> </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </section>
     </div>
 </div>

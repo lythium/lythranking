@@ -30,7 +30,11 @@ class LythRanking
         add_action('admin_menu', array($this,'add_admin_menu'));
         add_action('admin_bar_menu', array($this, 'custom_toolbar_link'), 999);
 
-        add_action('admin_enqueue_scripts', array($this, 'lythranking_scripts_admin' ));
+        if (isset($_GET['page'])) {
+            if ($_GET['page'] == 'lythrankinglist' || $_GET['page'] == 'lythrankingaddcategory') {
+                add_action('admin_enqueue_scripts', array($this, 'lythranking_scripts_admin' ));
+            }
+        }
 
         include_once plugin_dir_path(__FILE__).'controller/LythTools.php';
         new LythTools();
@@ -54,8 +58,8 @@ class LythRanking
         $sql_lythRanking_category = "CREATE TABLE $lythRanking_category (
             id_category mediumint(9) NOT NULL AUTO_INCREMENT,
             name varchar(255) NOT NULL,
-            parent varchar(255) DEFAULT NULL,
-            position int(5) NOT NULL,
+            parent varchar(255) NOT NULL DEFAULT '0',
+            position int(5) NOT NULL DEFAULT '0',
             UNIQUE KEY  (id_category)
         ) $charset_collate;";
 

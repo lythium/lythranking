@@ -1,20 +1,116 @@
 @charset "UTF-8";
 
+@import "fontello.css";
+@import "animation.css";
+
+.lythrankingaddcategory tfoot {
+    height: 25px!important;
+}
+.lythrankingaddcategory .icon-spin5 {
+    display: none;
+}
+div.alert  {
+    width: 250px;
+    height: 30px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    position: relative;
+    margin: 10px 0 20px 10px;
+    background: #ffffff;
+}
+div.alert p {
+    display: flex;
+    flex: 1;
+    height: 100%;
+    margin: 0 0 0 10px;
+    align-items: center;
+}
+div.alert i {
+    position: absolute;
+    top: 0;
+    right: 1px;
+    border: none;
+    margin: 0;
+    font-size: 18px;
+    padding: 7px;
+    background: 0 0;
+    color: #72777c;
+    cursor: pointer;
+}
+div.alert i::before {
+    display: block;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+}
+div.alert-success {
+    border-left: 4px solid green;
+}
+div.alert-error {
+    border-left: 4px solid red;
+}
 #two-column {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
 }
-#first-col,
-#second-col {
+#first-col>form,
+#second-col>div {
     border: 2px solid #444444;
-    background-color: #c5c5c5;
+    background-color: #e8e8e8;
     border-radius: 5px;
 }
 #first-col {
-    width: 55%;
+    width: 25%;
 }
 #second-col {
-    width:40%;
+    width:60%;
+}
+#add-category {
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+#add-category .group-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+#add-category .group-form-horizontal {
+    width: 100%;
+    padding-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+#add-category input[name="name"] {
+    width: 100px!important;
+}
+#add-category input[name="position"] {
+    width: 50px!important;
+}
+#add-category select[name="parent"] {
+    width: 120px!important;
+}
+#add-category button {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 150px;
+    text-align: center;
+    height: 30px;
+    font-weight: 700;
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #cccccc;
+}
+#add-category button:hover {
+    border: 2px inset lightblue;
+    background-color: #e7e7e7;
 }

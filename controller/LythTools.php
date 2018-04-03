@@ -4,6 +4,10 @@
  */
 class LythTools
 {
+    public static function isInt( int $value)
+    {
+        return is_Int($value);
+    }
     public static function isNumeric($value)
     {
         return is_numeric($value);
