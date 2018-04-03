@@ -29,12 +29,12 @@ class LythRankingSettingsCategory
             return false;
         };
         if (!empty($this->parent)) {
-            $parent = $this->parent;
+            $parent = (int) $this->parent;
         } else {
             $parent = 0;
         };
         if (!empty($this->position)) {
-            $position = $this->position;
+            $position = (int) $this->position;
         } else {
             $position = 0;
         };
