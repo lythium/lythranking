@@ -48,4 +48,19 @@ class LythRankingSettingsCategory
         }
         return true;
     }
+
+    public function update()
+    {
+        global $wpdb;
+        $lythRanking_category = $wpdb->prefix . 'lythranking_category';
+        $args = array(
+            'name' => $this->name,
+            'parent' => $this->parent,
+            'position' => $position
+        );
+        if (!$wpdb->update("$lythRanking_category", $args, array('id' => $this->id_category), array( '%s', '%d', '%d'), array('%d'))) {
+            return false;
+        }
+        return true;
+    }
 }
