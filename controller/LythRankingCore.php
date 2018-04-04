@@ -35,21 +35,48 @@ class LythRankingCore
                 'error' => 'Parent invalid'
             )));
         }
-
-        $obj = new LythRankingSettingsCategory();
-        $obj->name = $_POST['name'];
-        $obj->position = (int)$_POST['position'];
-        $obj->parent = (int) $_POST['parent'];
-        if (!$obj->add()) {
+        if ($_POST['method'] == "add") {
+            $obj = new LythRankingSettingsCategory();
+            $obj->name = $_POST['name'];
+            $obj->position = (int)$_POST['position'];
+            $obj->parent = (int) $_POST['parent'];
+            if (!$obj->add()) {
+                die(json_encode(array(
+                    'return' => false,
+                    'error' => 'Error to save'
+                )));
+            }
+            die(json_encode(array(
+                'return' => true,
+                'message' => 'Add Category Success'
+            )));
+        } elseif($_POST['method'] == "update") {
+            if (!isset($_POST['id']) && !LythTools::isInt((int) $_POST['id'])) {
+                die(json_encode(array(
+                    'return' => false,
+                    'error' => 'Error Id'
+                )));
+            }
+            $obj = new LythRankingSettingsCategory($_POST['id'])
+            $obj->name = $_POST['name'];
+            $obj->position = (int)$_POST['position'];
+            $obj->parent = (int) $_POST['parent'];
+            if (!$obj->update()) {
+                die(json_encode(array(
+                    'return' => false,
+                    'error' => 'Error to update'
+                )));
+            }
+            die(json_encode(array(
+                'return' => true,
+                'message' => 'Update Category Success'
+            )));
+        } else {
             die(json_encode(array(
                 'return' => false,
-                'error' => 'Error to save'
+                'error' => 'Method Error'
             )));
         }
-        die(json_encode(array(
-            'return' => true,
-            'message' => 'Add Category Success'
-        )));
     }
 
     public static function update_lr_Process() {
