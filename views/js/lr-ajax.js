@@ -2,7 +2,13 @@ jQuery(document).ready( function($){
     var $formAddCategory = $('#add-category'),
         $closeMessage = $('.alert .icon-cancel-circled'),
         $success = $('#lythranking_success p'),
-        $error = $('#lythranking_error p');
+        $error = $('#lythranking_error p'),
+        $dropdwon = $('.btn-drop');
+
+    $dropdwon.on('click', function(e){
+        e.stopPropagation();
+        $(this).parent().children('.dropdown').slideToggle(250);
+    });
 
     $closeMessage.on('click', function(e){
         e.preventDefault();
