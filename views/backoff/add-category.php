@@ -20,6 +20,12 @@
 
         <section id="first-col">
             <form id="add-category">
+                <?php if ($_GET["button"] == 'update' && isset($_GET["id_category"])): ?>
+                    <input type="hidden" name="method" value="update">
+                    <input type="hidden" name="id" value="<?php echo $_GET["id_category"] ?>">
+                <?php else: ?>
+                    <input type="hidden" name="method" value="add">
+                <?php endif; ?>
                 <div class="group-form-horizontal">
                     <div class="group-form">
                         <label for="name">Name</label>
