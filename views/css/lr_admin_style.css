@@ -19,11 +19,17 @@ div.alert  {
     background: #ffffff;
 }
 div.alert p {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex: 1;
+    -webkit-box-flex: 1;
+        -ms-flex: 1;
+            flex: 1;
     height: 100%;
     margin: 0 0 0 10px;
-    align-items: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 div.alert i {
     position: absolute;
@@ -50,10 +56,17 @@ div.alert-error {
     border-left: 4px solid red;
 }
 #two-column {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
 }
 #first-col>form,
 #second-col>div {
@@ -69,25 +82,49 @@ div.alert-error {
 }
 #add-category {
     padding: 20px 10px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 #add-category .group-form {
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
     width: 100%;
 }
 #add-category .group-form-horizontal {
     width: 100%;
     padding-bottom: 15px;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: center;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
 }
 #add-category input[name="name"] {
     width: 100px!important;
@@ -119,9 +156,59 @@ div.alert-error {
 #category-list th {
     text-align: center;
 }
-#category-list #delete_btn,
-#category-list #update_btn {
-    margin-top: 10px;
+#category-list .btn-group {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    position: relative;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+}
+.btn-drop {
+    width: 20%;
+    height: 30px;
+    border-radius: 0 5px 5px 0;
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #cccccc;
+    text-align: center;
+    padding: 0;
+}
+#category-list #update_btn{
+    border-radius: 5px 0 0 5px;
+    width: 80%;
+    text-align: center;
+    height: 30px;
+    font-weight: 700;
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #cccccc;
+    border-right: 0;
+}
+.btn-group .dropdown {
+    position: absolute;
+    top: 30px;
+    right: 0px;
+    display: none;
+    z-index: 100;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    width: 100%;
+}
+#category-list #delete_btn {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
@@ -131,4 +218,12 @@ div.alert-error {
     background: #ffffff;
     color: #000000;
     border: 2px solid #cccccc;
+    border-radius: 5px;
+}
+#category-list .children .icon-level-down {
+    margin-right: 20px;
+}
+#category-list .children .icon-level-down::before {
+    -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
 }
