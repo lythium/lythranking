@@ -92,12 +92,12 @@ class LythRankingCore
         return $results;
     }
 
-    public static function getChildrenCategory()
+    public static function getChildrenCategory($id_parent)
     {
         global $wpdb;
         $lythRanking_category = $wpdb->prefix . 'lythranking_category';
 
-        $results = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE parent != 0 ORDER BY id_category ASC", OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE parent = $id_parent ORDER BY position ASC", OBJECT);
         if (!$results) {
             $results = false;
         }
