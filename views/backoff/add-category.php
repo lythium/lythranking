@@ -2,6 +2,7 @@
     <div class="acf-columns-2">
         <h1 class="wp-heading-inline"><?= get_admin_page_title() ?></h1>
         <a class="page-title-action" href="<?= admin_url('admin.php?page=lythrankinglist') ?>" class="page-title-action">Retour</a>
+        <input type="hidden" id="url_page" value="<?= admin_url('admin.php?page=lythrankingaddcategory') ?>">
 
     </div>
     <div>
@@ -20,20 +21,29 @@
 
         <section id="first-col">
             <form id="add-category">
-                <?php if ($_GET["button"] == 'update' && isset($_GET["id_category"])): ?>
+                <?php $mode = 'add'; ?>
+                <?php $name = ''; ?>
+                <?php $position = 0; ?>
+                <?php $parent = 0; ?>
+                <?php if (isset($_GET["button"]) && $_GET["button"] == 'update' && isset($_GET["id_category"])): ?>
                     <input type="hidden" name="method" value="update">
                     <input type="hidden" name="id" value="<?php echo $_GET["id_category"] ?>">
+                    <?php $currentCat = new LythRankingSettingsCategory($_GET["id_category"]); ?>
+                    <?php $mode = 'update'; ?>
+                    <?php $name = $currentCat->name; ?>
+                    <?php $position = $currentCat->position; ?>
+                    <?php $parent = $currentCat->parent; ?>
                 <?php else: ?>
                     <input type="hidden" name="method" value="add">
                 <?php endif; ?>
                 <div class="group-form-horizontal">
                     <div class="group-form">
                         <label for="name">Name</label>
-                        <input type="text" name="name" value="">
+                        <input type="text" name="name" value="<?php echo $name ?>" placeholder="<?php echo $name ?>">
                     </div>
                     <div class="group-form">
                         <label for="position">Position</label>
-                        <input type="text" name="position" value="0" pattern="[0-9]">
+                        <input type="text" name="position" value="<?php echo $position ?>" pattern="[0-9]" placeholder="<?php echo $position ?>">
                     </div>
                 </div>
                 <div class="group-form-horizontal">
@@ -41,14 +51,17 @@
                     <select class="" name="parent">
                         <?php $results = LythRankingCore::getCategoryParent(); ?>
                         <?php if ($results): ?>
-                            <option value="0">No Category</option>
+                            <option <?php if ($parent == 0) echo "selected";?> value="0">No Category</option>
                             <?php foreach ($results as $cat): ?>
-                                <option value="<?php echo $cat->id_category ?>"><?php echo $cat->name ?></option>
+                                <option <?php if ($parent == $cat->id_category) echo "selected";?> value="<?php echo $cat->id_category ?>"><?php echo $cat->name ?></option>
                             <?php endforeach; ?>
                         <?php endif; ?>
                     </select>
                 </div>
-                <button type="submit" name="button" value="add"><i class="icon-spin5 animate-spin"></i><span class="icon_text">Add</span></button>
+                <button type="submit" name="button" value="add">
+                    <i class="icon-spin5 animate-spin"></i>
+                    <span class="icon_text"><?php if ($mode = 'update') echo "Update"; else echo "Add"; ?></span>
+                </button>
             </form>
         </section>
 
