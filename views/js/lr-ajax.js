@@ -4,6 +4,7 @@ jQuery(document).ready( function($){
         $success = $('#lythranking_success p'),
         $error = $('#lythranking_error p'),
         $dropdwon = $('.btn-drop');
+        $url_page_add = $('#url_page').val();
 
     $dropdwon.on('click', function(e){
         e.stopPropagation();
@@ -39,6 +40,9 @@ jQuery(document).ready( function($){
                         console.log(data.message);
                         $success.html(data.message);
                         $success.parent().css('display', 'block');
+                        setTimeout(function(){
+                            $(location).attr('href', $url_page_add);
+                        }, 1500);
                     } else {
                         console.log(data.error);
                         $error.html(data.error);
