@@ -38,8 +38,16 @@ class LythRankingCore
         if ($_POST['method'] == "add") {
             $obj = new LythRankingSettingsCategory();
             $obj->name = $_POST['name'];
-            $obj->position = (int)$_POST['position'];
+            $obj->position = (int) $_POST['position'];
             $obj->parent = (int) $_POST['parent'];
+
+            if (!$obj->repositioningCategory()) {
+                die(json_encode(array(
+                    'return' => false,
+                    'error' => 'update order failed'
+                )));
+            }
+
             if (!$obj->add()) {
                 die(json_encode(array(
                     'return' => false,
@@ -57,10 +65,17 @@ class LythRankingCore
                     'error' => 'Error Id'
                 )));
             }
-            $obj = new LythRankingSettingsCategory($_POST['id'])
+            $obj = new LythRankingSettingsCategory($_POST['id']);
             $obj->name = $_POST['name'];
-            $obj->position = (int)$_POST['position'];
+            $obj->position = (int) $_POST['position'];
             $obj->parent = (int) $_POST['parent'];
+
+            if (!$obj->repositioningCategory()) {
+                die(json_encode(array(
+                    'return' => false,
+                    'error' => 'update order failed'
+                )));
+            }
             if (!$obj->update()) {
                 die(json_encode(array(
                     'return' => false,
@@ -112,7 +127,7 @@ class LythRankingCore
         global $wpdb;
         $lythRanking_category = $wpdb->prefix . 'lythranking_category';
 
-        $results = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE parent = 0 ORDER BY id_category ASC", OBJECT);
+        $results = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE parent = 0 ORDER BY position ASC", OBJECT);
         if (!$results) {
             $results = false;
         }
