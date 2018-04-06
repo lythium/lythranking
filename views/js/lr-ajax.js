@@ -58,8 +58,8 @@ jQuery(document).ready( function($){
         }, 2000);
     });
     function toggleSpin(mode) {
-        var $spin = $('button .icon-spin5'),
-            $text = $('button .icon_text');
+        var $spin = $('#btn-form .icon-spin5'),
+            $text = $('#btn-form .icon_text');
         switch (mode) {
             case true:
                 $text.css('display', 'none');
