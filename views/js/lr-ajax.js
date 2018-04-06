@@ -1,4 +1,5 @@
 jQuery(document).ready( function($){
+    // Page Add Category
     var $formAddCategory = $('#add-category'),
         $closeMessage = $('.alert .icon-cancel-circled'),
         $success = $('#lythranking_success p'),
@@ -72,4 +73,18 @@ jQuery(document).ready( function($){
 
         }
     }
+    // Page list
+    var $btnDisplayForm = $('button#form_unit'),
+        $btnCloseDisplayForm = $('#close_form_unit');
+
+    $btnDisplayForm.on('click', function(event){
+        event.stopPropagation();
+        $(this).slideToggle(0);
+        $('#table_add_unit').slideToggle(250);
+    });
+    $btnCloseDisplayForm.on('click', function(event){
+        event.stopPropagation();
+        $('#table_add_unit').slideToggle(0);
+        $btnDisplayForm.slideToggle(250);
+    });
 });
