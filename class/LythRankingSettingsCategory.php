@@ -8,6 +8,7 @@ class LythRankingSettingsCategory
     public $name;
     public $parent = 0;
     public $position = 0;
+    public $date_update = '0000-00-00 00:00:00';
 
     public function __construct($id_category = null)
     {
@@ -19,7 +20,7 @@ class LythRankingSettingsCategory
         }
     }
 
-    public function add()
+    public function addCategory()
     {
         global $wpdb;
         $lythRanking_category = $wpdb->prefix . 'lythranking_category';
@@ -33,15 +34,38 @@ class LythRankingSettingsCategory
         } else {
             $parent = 0;
         };
-        if (!empty($this->position)) {
+        if (!empty($this->position) || $this->positon <= 0) {
             $position = (int) $this->position;
         } else {
-            $position = 0;
+            $position = 1;
         };
+        // check is other category in this position
+        $results = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE position = $position AND parent = $this->parent");
+        if ($results) {
+            $resultsSup = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE position >= $position AND parent = $this->parent");
+        }
+        // update Category >= this position
+        if ($resultsSup) {
+            $date = current_time("mysql");
+            foreach ($resultsSup as $rowSup) {
+                $posUp = (int) $rowSup->position + 1;
+                $args = array(
+                    'name' => (string) $rowSup->name,
+                    'parent' => (int) $rowSup->parent,
+                    'position' => $posUp,
+                    'date_update' => $date
+                );
+                if (!$wpdb->update("$lythRanking_category", $args, array('id_category' => $rowSup->id_category), array( '%s', '%d', '%d', '%s'), array('%d'))) {
+                    return false;
+                }
+            }
+        }
+
         $args = array(
             'name' => $this->name,
-            'parent' => $this->parent,
-            'position' => $position
+            'parent' => $parent,
+            'position' => $position,
+            'date_update' => $this->date_update
         );
         if (!$wpdb->insert("$lythRanking_category", $args)) {
             return false;
@@ -49,56 +73,45 @@ class LythRankingSettingsCategory
         return true;
     }
 
-    public function update()
+    public function updateCategory()
     {
         global $wpdb;
         $lythRanking_category = $wpdb->prefix . 'lythranking_category';
-        $result = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE id_category = $this->id_category AND name = '$this->name' AND position = $this->position AND parent = $this->parent");
-        if ($result) {
-            return true;
-        }
-        $args = array(
-            'name' => $this->name,
-            'parent' => $this->parent,
-            'position' => $this->position
-        );
-        if (!$wpdb->update("$lythRanking_category", $args, array('id_category' => $this->id_category), array( '%s', '%d', '%d'), array('%d'))) {
-            return false;
-        }
-        return true;
-    }
-    public function repositioningCategory() {
-        global $wpdb;
+        // $resultNoModif = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE id_category = $this->id_category AND name = '$this->name' AND position = $this->position AND parent = $this->parent");
+        // if ($resultNoModif) {
+        //     return true;
+        // }
 
-        $lythRanking_category = $wpdb->prefix . 'lythranking_category';
-        if ($this->id_category) {
-            $results = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE id_category != $this->id_category AND position = $this->position AND parent = $this->parent");
-            if ($results) {
-                $resultsSup = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE id_category != $this->id_category AND position >= $this->position AND parent = $this->parent");
-            }
-        } else {
-            $results = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE position = $this->position AND parent = $this->parent");
-            if ($results) {
-                $resultsSup = $results = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE position >= $this->position AND parent = $this->parent");
-            }
-        }
-        if (!$resultsSup) {
-            return true;
-        }
+        $indexPos = $this->position - 1;
+        $results = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE id_category != $this->id_category AND parent = $this->parent ORDER BY position ASC");
+        $current = $wpdb->get_results("SELECT * FROM $lythRanking_category WHERE id_category = $this->id_category");
+        // modif $this
+        $current[0]->name = $this->name;
+        $current[0]->position = (int) $this->position;
+        $current[0]->parent = (int) $this->parent;
+        $current[0]->date_update = $this->date_update;
 
-        foreach ($resultsSup as $row) {
-            $posUp = (int) $row->position + 1;
+        $resOrder = array_merge(array_slice($results, 0, $indexPos, true), $current, array_slice($results, $indexPos, null, true));
+        // LythTools::array_object_orderby($res, 'position', SORT_ASC);
+        // return $resOrder;
+
+        $reIndex = 1;
+        foreach ($resOrder as $row) {
+            $date = current_time("mysql");
             $args = array(
-                'name' => (string) $row->name,
+                'name' => $row->name,
                 'parent' => (int) $row->parent,
-                'position' => $posUp
+                'position' => (int) $reIndex,
+                'date_update' => $date
             );
-            if (!$wpdb->update("$lythRanking_category", $args, array('id_category' => $row->id_category), array( '%s', '%d', '%d'), array('%d'))) {
+            // $wpdb->query( $wpdb->prepare("UPDATE $lythRanking_category WHERE id_category => $row->id_category  post_id = %d AND start IS NULL AND end IS NULL", $event_tag, $post_ID ) );
+            if (!$wpdb->update("$lythRanking_category", $args, array('id_category' => $row->id_category), array( '%s', '%d', '%d', '%s'), array('%d'))) {
                 return false;
-            }
-            $count++;
-        }
+            };
 
+            $reIndex++;
+        };
         return true;
     }
+
 }
