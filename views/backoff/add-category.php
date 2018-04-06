@@ -18,12 +18,11 @@
     <div class="separator" style="display:block;margin-top:40px;"></div>
     <h3>Category</h3>
     <div id="two-column">
-
         <section id="first-col">
             <form id="add-category">
                 <?php $mode = 'add'; ?>
                 <?php $name = ''; ?>
-                <?php $position = 0; ?>
+                <?php $position = 1; ?>
                 <?php $parent = 0; ?>
                 <?php if (isset($_GET["button"]) && $_GET["button"] == 'update' && isset($_GET["id_category"])): ?>
                     <input type="hidden" name="method" value="update">
@@ -55,12 +54,14 @@
                             <?php foreach ($results as $cat): ?>
                                 <option <?php if ($parent == $cat->id_category) echo "selected";?> value="<?php echo $cat->id_category ?>"><?php echo $cat->name ?></option>
                             <?php endforeach; ?>
+                        <?php else: ?>
+                            <option value="0">No Category</option>
                         <?php endif; ?>
                     </select>
                 </div>
-                <button type="submit" name="button" value="add">
+                <button id="btn-form" type="submit" name="button" value="add">
                     <i class="icon-spin5 animate-spin"></i>
-                    <span class="icon_text"><?php if ($mode = 'update') echo "Update"; else echo "Add"; ?></span>
+                    <span class="icon_text"><?php if ($mode == 'update') echo "Update"; else echo "Add"; ?></span>
                 </button>
             </form>
         </section>
@@ -116,13 +117,13 @@
                                                 <span><?php echo $child->id_category ?></span>
                                             </th>
                                             <th>
-                                                <span><i class="icon-level-down"></i><?php echo $child->name ?></span>
+                                                <span><i class="icon-level-up"></i><?php echo $child->name ?></span>
                                             </th>
                                             <th>
-                                                <span><?php echo $obj->name ?></span>
+                                                <span><i class="icon-level-up"></i><?php echo $obj->name ?></span>
                                             </th>
                                             <th>
-                                                <span><?php echo $child->position ?></span>
+                                                <span><i class="icon-level-up"></i><?php echo $child->position ?></span>
                                             </th>
                                             <th>
                                                 <form  action="<?= admin_url('admin.php') ?>" method="GET">
