@@ -9,11 +9,15 @@
 .lythrankingaddcategory .icon-spin5 {
     display: none;
 }
-.lythrankingaddcategory th#field_0 {
+.lythrankingaddcategory th#field_0,
+.lythranking th#field_0 {
     width: 5%!important;
 }
 .lythrankingaddcategory th#field_3 {
     width: 10%!important;
+}
+.lythranking #category-list th#field_4 {
+    width: 15%;
 }
 div.alert  {
     width: 250px;
@@ -153,11 +157,13 @@ div.alert-error {
     color: #000000;
     border: 2px solid #cccccc;
 }
+.page-title-action:hover,
 #add-category button:hover,
 #category-list #delete_btn:hover,
 #category-list #update_btn:hover {
-    border: 2px inset lightblue;
-    background-color: #e7e7e7;
+    border: 2px inset black!important;
+    background-color: #d1d3fe!important;
+    color: #333333!important;
 }
 #category-list th {
     text-align: center;
@@ -176,7 +182,7 @@ div.alert-error {
             justify-content: flex-start;
 }
 .btn-drop {
-    width: 20%;
+    width: 20%!important;
     height: 30px;
     border-radius: 0 5px 5px 0;
     background: #ffffff;
@@ -236,8 +242,49 @@ div.alert-error {
     -webkit-transform: rotate(90deg);
             transform: rotate(90deg);
 }
-/* #category-list .children th:nth-child(2), */
-/* #category-list .children th:nth-child(3),
-#category-list .children th:nth-child(4) {
-    text-align: right;
-} */
+/* Page List */
+#field_7 {
+    position: relative;
+}
+#section-1,
+#section-3 {
+    margin-top: 35px;
+}
+#section-2 {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+button#form_unit {
+    width: 250px!important;
+    height: 45px!important;
+}
+#close_form_unit {
+    cursor: pointer;
+    position: absolute;
+    right: 4px;
+    font-size: 24px;
+}
+#table_add_unit {
+    display: none;
+    width:100%;
+}
+.lythranking section button {
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 150px;
+    text-align: center;
+    height: 30px;
+    font-weight: 700;
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #cccccc;
+}
+.lythranking section button:hover {
+    border: 2px inset black!important;
+    background-color: #d1d3fe!important;
+    color: #333333!important;
+}
