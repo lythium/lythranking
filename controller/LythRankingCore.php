@@ -40,15 +40,9 @@ class LythRankingCore
             $obj->name = $_POST['name'];
             $obj->position = (int) $_POST['position'];
             $obj->parent = (int) $_POST['parent'];
+            $obj->date_update = (string) current_time("mysql");
 
-            if (!$obj->repositioningCategory()) {
-                die(json_encode(array(
-                    'return' => false,
-                    'error' => 'update order failed'
-                )));
-            }
-
-            if (!$obj->add()) {
+            if (!$obj->addCategory()) {
                 die(json_encode(array(
                     'return' => false,
                     'error' => 'Error to save'
@@ -69,14 +63,9 @@ class LythRankingCore
             $obj->name = $_POST['name'];
             $obj->position = (int) $_POST['position'];
             $obj->parent = (int) $_POST['parent'];
+            $obj->date_update = current_time("mysql");
 
-            if (!$obj->repositioningCategory()) {
-                die(json_encode(array(
-                    'return' => false,
-                    'error' => 'update order failed'
-                )));
-            }
-            if (!$obj->update()) {
+            if (!$obj->updateCategory()) {
                 die(json_encode(array(
                     'return' => false,
                     'error' => 'Error to update'

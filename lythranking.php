@@ -67,6 +67,7 @@ class LythRanking
             name varchar(255) NOT NULL,
             parent varchar(255) NOT NULL DEFAULT '0',
             position int(5) NOT NULL DEFAULT '0',
+            date_update datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
             UNIQUE KEY  (id_category)
         ) $charset_collate;";
 
@@ -79,6 +80,7 @@ class LythRanking
             url_post varchar(255) DEFAULT '0' NOT NULL,
             positive_details varchar(255) NOT NULL,
             negative_details varchar(255) DEFAULT '',
+            date_update datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
             UNIQUE KEY  (id_rank)
         ) $charset_collate;";
 
