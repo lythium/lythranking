@@ -235,10 +235,10 @@ div.alert-error {
     border-radius: 5px;
 }
 #category-list .children th {
-    padding: 0 10px;
+    padding: 4px 10px;
 }
 #category-list .children .icon-level-up {
-    margin-right: 20px;
+    margin-right: 10px;
 }
 #category-list .children .icon-level-up::before {
     -webkit-transform: rotate(90deg);
@@ -259,12 +259,24 @@ div.alert-error {
     justify-content: center;
     align-items: center;
 }
+#section-2 thead,
+#section-2 tfoot {
+    background-color: #303030;
+}
+#section-2 tbody td {
+    border-bottom: 1px #303030 solid;
+}
+#section-2 thead tr th {
+    color: #ffffff;
+    border-top: 1px #303030 solid;
+}
 button#form_unit {
     width: 250px!important;
     height: 45px!important;
 }
 #close_form_unit {
     cursor: pointer;
+    color: #ffffff;
     position: absolute;
     right: 4px;
     top: 4px;

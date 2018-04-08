@@ -6,8 +6,8 @@
                 <th scope="col" id="field_2" class="manage-column column-title column-primary column-fields">Unit Rank</th>
                 <th colspan="2" scope="col" id="field_3" class="manage-column column-fields">Unit Name</th>
                 <th scope="col" id="field_4" class="manage-column column-fields"></th>
-                <th scope="col" id="field_5" class="manage-column column-fields">Category</th>
-                <th scope="col" id="field_6" class="manage-column column-fields">Image unit</th>
+                <th scope="col" id="field_5" class="manage-column column-fields">Image unit</th>
+                <th scope="col" id="field_6" class="manage-column column-fields">Category</th>
                 <th scope="col" id="field_7" class="manage-column column-fields"><i id="close_form_unit" class="icon-cancel-circled"></i></th>
             </tr>
         </thead>
@@ -20,7 +20,7 @@
                     <td colspan="1">
                         <div class="group-form-horizontal">
                             <label for="unit_rank">#</label>
-                            <input type="number" name="unit_rank" value="1" placeholder="1" pattern="[0-9]">
+                            <input type="number" name="unit_rank" value="1" placeholder="1" pattern="[0-9]" min="1">
                         </div>
                     </td>
                     <td colspan="2">
@@ -30,6 +30,16 @@
                         </div>
                     </td>
                     <td colspan="1"></td>
+                    <td>
+                        <div class="form-group" id="image_url_group">
+                            <input type="hidden" name="image_url" id="image_url" class="text" value="">
+                            <input type="button" name="upload-btn" id="upload-btn" class="button-secondary" value="Upload Image">
+                        </div>
+                        <div class="image_group">
+                            <img  src="" alt="" id="upload_image">
+                            <a href="" id="close_upload"><i class="icon-cancel-circled"></i></a>
+                        </div>
+                    </td>
                     <td>
                         <select class="" name="category">
                             <?php $results = LythRankingCore::getCategoryParent(); ?>
@@ -47,16 +57,6 @@
                                 <option value="0">No Category</option>
                             <?php endif; ?>
                         </select>
-                    </td>
-                    <td>
-                        <div class="form-group" id="image_url_group">
-                            <input type="hidden" name="image_url" id="image_url" class="text" value="">
-                            <input type="button" name="upload-btn" id="upload-btn" class="button-secondary" value="Upload Image">
-                        </div>
-                        <div class="image_group">
-                            <img  src="" alt="" id="upload_image">
-                            <a href="" id="close_upload"><i class="icon-cancel-circled"></i></a>
-                        </div>
                     </td>
                     <td colspan="1"></td>
             </tr>
