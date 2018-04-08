@@ -3,7 +3,8 @@
 @import "fontello.css";
 @import "animation.css";
 
-.lythrankingaddcategory tfoot {
+.lythrankingaddcategory tfoot,
+.lythranking tfoot {
     height: 25px!important;
 }
 .lythrankingaddcategory .icon-spin5 {
@@ -90,7 +91,7 @@ div.alert-error {
 #second-col {
     width:60%;
 }
-#add-category {
+#add-category-form {
     padding: 20px 10px;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -105,7 +106,7 @@ div.alert-error {
         -ms-flex-align: center;
             align-items: center;
 }
-#add-category .group-form {
+#add-category-form .group-form {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -120,7 +121,7 @@ div.alert-error {
             align-items: center;
     width: 100%;
 }
-#add-category .group-form-horizontal {
+#add-category-form .group-form-horizontal {
     width: 100%;
     padding-bottom: 15px;
     display: -webkit-box;
@@ -136,16 +137,16 @@ div.alert-error {
         -ms-flex-align: center;
             align-items: center;
 }
-#add-category input[name="name"] {
+#add-category-form input[name="name"] {
     width: 100px!important;
 }
-#add-category input[name="position"] {
+#add-category-form input[name="position"] {
     width: 50px!important;
 }
-#add-category select[name="parent"] {
+#add-category-form select[name="parent"] {
     width: 120px!important;
 }
-#add-category button {
+#add-category-form button {
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
@@ -158,13 +159,14 @@ div.alert-error {
     border: 2px solid #cccccc;
 }
 .page-title-action:hover,
-#add-category button:hover,
+#add-category-form button:hover,
 #category-list #delete_btn:hover,
 #category-list #update_btn:hover {
     border: 2px inset black!important;
     background-color: #d1d3fe!important;
     color: #333333!important;
 }
+.lythranking th,
 #category-list th {
     text-align: center;
 }
@@ -265,11 +267,100 @@ button#form_unit {
     cursor: pointer;
     position: absolute;
     right: 4px;
+    top: 4px;
     font-size: 24px;
 }
 #table_add_unit {
     display: none;
     width:100%;
+}
+.lythranking thead th {
+    border-bottom: 1px solid #a7a7a7;
+    border-top: 1px solid #a7a7a7;
+}
+.lythranking tfoot td {
+    border-top: 1px solid #a7a7a7;
+}
+.lythranking table {
+    border: 1px solid #a7a7a7;
+}
+.lythranking .group-form-horizontal {
+    width: 100%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+}
+.lythranking input,
+.lythranking textarea,
+.lythranking select,
+.lythranking #btn-form {
+    width: 100%;
+}
+.lythranking .group-form-horizontal input[name="unit_name"],
+.lythranking .group-form-horizontal input[name="url_post"] {
+    width: 50%!important;
+}
+.lythranking i.close-row {
+    font-size: 24px;
+    color: red;
+}
+.lythranking #btn-form i {
+    display: none;
+}
+.lythranking .image_group {
+    display: none;
+    position: relative;
+}
+.lythranking .image_group img {
+    margin-left: auto;
+    margin-right: auto;
+}
+.lythranking i#icone-add-row {
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
+}
+.lythranking i#icone-add-row::before {
+    transform: rotate(45deg);
+}
+.lythranking .image_group #close_upload {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+}
+.lythranking .image_group #close_upload i {
+    color: red;
+    font-size: 24px;
+}
+label[for="unit_rank"] {
+    display: block;
+    height: 28px!important;
+    width: 20%!important;
+    padding: 3px 4px;
+    margin: 1px;
+    margin-right: 0;
+    border: 1px solid #ddd;
+    border-right: 0;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+    background-color: #fff;
+    color: #32373c;
+    outline: 0;
+    font-size: 18px;
+    text-align: center;
+    box-sizing: border-box;
+}
+input[name="unit_rank"] {
+    width: 80%!important;
+    margin-left: 0;
 }
 .lythranking section button {
     margin-top: 10px;
