@@ -65,8 +65,9 @@ class LythRanking
         $sql_lythRanking_category = "CREATE TABLE $lythRanking_category (
             id_category mediumint(9) NOT NULL AUTO_INCREMENT,
             name varchar(255) NOT NULL,
-            parent varchar(255) NOT NULL DEFAULT '0',
             position int(5) NOT NULL DEFAULT '0',
+            parent varchar(255) NOT NULL DEFAULT '0',
+            color varchar(7) NOT NULL DEFAULT '#ffffff',
             date_update datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
             UNIQUE KEY  (id_category)
         ) $charset_collate;";
