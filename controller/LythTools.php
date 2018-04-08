@@ -37,4 +37,8 @@ class LythTools
 
         return true;
     }
+    public static function isColor($color)
+    {
+        return preg_match('/^(#[0-9a-fA-F]{6}|[a-zA-Z0-9-]*)$/', $color);
+    }
 }

@@ -39,11 +39,18 @@ class LythRankingCore
                 'error' => 'Parent invalid'
             )));
         }
+        if (isset($_POST['color']) && $_POST['color'] === '0' && !LythTools::isColor((int) $_POST['color'])) {
+            die(json_encode(array(
+                'return' => false,
+                'error' => 'Color invalid'
+            )));
+        }
         if ($_POST['method'] == "add") {
             $obj = new LythRankingSettingsCategory();
             $obj->name = $_POST['name'];
             $obj->position = (int) $_POST['position'];
             $obj->parent = (int) $_POST['parent'];
+            $obj->color = (string) $_POST['color'];
             $obj->date_update = (string) current_time("mysql");
 
             if (!$obj->addCategory()) {
@@ -67,6 +74,7 @@ class LythRankingCore
             $obj->name = $_POST['name'];
             $obj->position = (int) $_POST['position'];
             $obj->parent = (int) $_POST['parent'];
+            $obj->color = (string) $_POST['color'];
             $obj->date_update = current_time("mysql");
 
             if (!$obj->updateCategory()) {
