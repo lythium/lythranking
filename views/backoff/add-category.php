@@ -1,3 +1,12 @@
+<?php
+    if (isset($_GET["button"])) {
+        if ($_GET["button"] === "delete" && !empty($_GET['id_category'])) {
+            $obj_delete = new LythRankingSettingsCategory($_GET['id_category']);
+            $obj_delete->deleteCategory();
+        }
+    }
+ ?>
+
 <div id="acf-field-group-wrap" class="wrap lythrankingaddcategory">
     <div class="acf-columns-2">
         <h1 class="wp-heading-inline"><?= get_admin_page_title() ?></h1>
@@ -24,6 +33,7 @@
                 <?php $name = ''; ?>
                 <?php $position = 1; ?>
                 <?php $parent = 0; ?>
+                <?php $color = '#ffffff'; ?>
                 <?php if (isset($_GET["button"]) && $_GET["button"] == 'update' && isset($_GET["id_category"])): ?>
                     <input type="hidden" name="method" value="update">
                     <input type="hidden" name="id" value="<?php echo $_GET["id_category"] ?>">
@@ -32,6 +42,7 @@
                     <?php $name = $currentCat->name; ?>
                     <?php $position = $currentCat->position; ?>
                     <?php $parent = $currentCat->parent; ?>
+                    <?php $color = $currentCat->color; ?>
                 <?php else: ?>
                     <input type="hidden" name="method" value="add">
                 <?php endif; ?>
@@ -42,7 +53,7 @@
                     </div>
                     <div class="group-form">
                         <label for="position">Position</label>
-                        <input type="text" name="position" value="<?php echo $position ?>" pattern="[0-9]" placeholder="<?php echo $position ?>">
+                        <input type="number" name="position" value="<?php echo $position ?>" pattern="[0-9]" min="1" placeholder="<?php echo $position ?>">
                     </div>
                 </div>
                 <div class="group-form-horizontal">
@@ -58,6 +69,10 @@
                             <option value="0">No Category</option>
                         <?php endif; ?>
                     </select>
+                </div>
+                <div class="group-form">
+                    <label for="color">Color Hexa</label>
+                    <input type="text" name="color" value="<?php echo $color ?>" placeholder="<?php echo $color ?>">
                 </div>
                 <button id="btn-form" type="submit" name="button" value="add">
                     <i class="icon-spin5 animate-spin"></i>
@@ -123,7 +138,7 @@
                                                 <span><i class="icon-level-up"></i><?php echo $obj->name ?></span>
                                             </th>
                                             <th>
-                                                <span><i class="icon-level-up"></i><?php echo $child->position ?></span>
+                                                <span><i class="icon-level-up"></i><?php echo $obj->position ?> - <?php echo $child->position ?></span>
                                             </th>
                                             <th>
                                                 <form  action="<?= admin_url('admin.php') ?>" method="GET">
