@@ -19,7 +19,7 @@
     <h3>Category</h3>
     <div id="two-column">
         <section id="first-col">
-            <form id="add-category">
+            <form id="add-category-form">
                 <?php $mode = 'add'; ?>
                 <?php $name = ''; ?>
                 <?php $position = 1; ?>
