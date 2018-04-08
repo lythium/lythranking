@@ -2,6 +2,8 @@
     <div class="acf-columns-2">
         <h1 class="wp-heading-inline"><?= get_admin_page_title() ?></h1>
         <a class="page-title-action" href="<?= admin_url('admin.php?page=lythrankingaddcategory') ?>" class="page-title-action">Ajouter Category</a>
+        <input type="hidden" id="url_page" value="<?= admin_url('admin.php?page=lythrankinglist') ?>">
+
 
     </div>
     <div>
