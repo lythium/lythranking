@@ -129,28 +129,40 @@ class LythRankingCore
             )));
         }
         if (!empty($_POST['positive_details'])) {
-             if (!LythTools::isString($_POST['positive_details'])) {
-                die(json_encode(array(
-                    'return' => false,
-                    'error' => 'Positive Details invalid'
-                )));
+            $positive_details = $_POST['positive_details'];
+            foreach ($positive_details as $key) {
+                if (!LythTools::isString($key)) {
+                    die(json_encode(array(
+                        'return' => false,
+                        'error' => 'Positive Details invalid'
+                    )));
+                }
             }
         }
         if (!empty($_POST['negative_details'])) {
-             if (!LythTools::isString($_POST['negative_details'])) {
-                die(json_encode(array(
-                    'return' => false,
-                    'error' => 'Negative Details invalid'
-                )));
+            $negative_details = $_POST['negative_details'];
+            foreach ($negative_details as $key) {
+                if (!LythTools::isString($key)) {
+                    die(json_encode(array(
+                        'return' => false,
+                        'error' => 'Negative Details invalid'
+                    )));
+                }
             }
         }
+        return true;
     }
 
-    public static function getItem($id_unit)
+    public static function getUnit($id_rank)
     {
         global $wpdb;
+        $lythRanking_unit = $wpdb->prefix . 'lythranking';
 
-        return;
+        $results = $wpdb->get_results("SELECT * FROM $lythRanking_unit WHERE id_rank = $id_rank", OBJECT);
+        if (!$results) {
+            $results = false;
+        }
+        return $results;
     }
 
     public static function getListRank()
