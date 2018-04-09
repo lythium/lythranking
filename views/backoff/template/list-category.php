@@ -42,7 +42,7 @@
                         <span><i class="icon-level-up"></i><?php echo $obj->name ?></span>
                     </th>
                     <th>
-                        <span><i class="icon-level-up"></i><?php echo $child->position ?></span>
+                        <span><i class="icon-level-up"></i><?php echo $obj->position ?> - <?php echo $child->position ?></span>
                     </th>
                     <th>
                         <form  action="<?= admin_url('admin.php') ?>" method="GET">

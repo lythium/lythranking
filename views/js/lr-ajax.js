@@ -157,23 +157,30 @@ jQuery(document).ready( function($){
         $('.image_group').css('display', 'none');
         $('#image_url_group').css('display', 'block');
     });
-
     $addDetails.on('click', function(event){
         event.stopPropagation();
-        $('<tr>'+
+        var $count = $("#table_add_unit tr[id^=details_]").length;
+        if ($count == null) {
+            $count = 0;
+        }
+        $('<tr id="details_'+$count+'">'+
             '<td colspan="1"></td>'+
             '<td colspan="3">'+
-                '<input type="text"  name="positive_details[]" value=""></input>'+
+                '<input type="text"  name="positive_details['+$count+']" value=""></input>'+
             '</td>'+
             '<td colspan="3">'+
-                '<input type="text"  name="negative_details[]" value=""></input>'+
+                '<input type="text"  name="negative_details['+$count+']" value=""></input>'+
             '</td>'+
             '<td colspan="1"><i class="close-row icon-cancel-circled"></i></td>'+
         '</tr>').insertBefore("tr.add-row");
-        $('.close-row').on('click', function(event){
+        if ($count >= 1) {
+            $('#tbody_details').children('tr#details_'+($count - 1)+'').children('td:last-child').html('');
+        }
+        $('#details_'+$count+' .close-row').on('click', function(event){
             event.preventDefault();
             event.stopPropagation();
             $(this).parent().parent('tr').remove();
+            $('#tbody_details').children('tr#details_'+($count - 1)+'').children('td:last-child').html('<i class="close-row icon-cancel-circled"></i>');
         });
     });
 });

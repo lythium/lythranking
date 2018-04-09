@@ -69,14 +69,14 @@
                 <th colspan="1" scope="col" id="field_4" class="manage-column column-fields"></i></th>
             </tr>
         </thead>
-        <tbody>
-            <tr>
+        <tbody id="tbody_details">
+            <tr id="details_0">
                 <td colspan="1"></td>
                 <td colspan="3">
-                    <input type="text"  name="positive_details[]" value=""></input>
+                    <input type="text"  name="positive_details[0]" value=""></input>
                 </td>
                 <td colspan="3">
-                    <input type="text"  name="negative_details[]" value=""></input>
+                    <input type="text"  name="negative_details[0]" value=""></input>
                 </td>
                 <td colspan="1"></td>
             </tr>
