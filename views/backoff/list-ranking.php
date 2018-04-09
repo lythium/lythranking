@@ -1,3 +1,14 @@
+<?php
+    if (isset($_GET["button"])) {
+        if ($_GET["button"] === "delete_category" && !empty($_GET['id_category'])) {
+            $obj_delete = new LythRankingSettingsCategory($_GET['id_category']);
+            $obj_delete->deleteCategory();
+        } elseif ($_GET["button"] === "delete_unit" && !empty($_GET['id_rank'])) {
+
+        }
+    }
+ ?>
+
 <div id="acf-field-group-wrap" class="wrap lythranking">
     <div class="acf-columns-2">
         <h1 class="wp-heading-inline"><?= get_admin_page_title() ?></h1>
