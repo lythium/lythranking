@@ -7,7 +7,7 @@ class LythRankingSettingsCategory
     public $id_category;
     public $name;
     public $parent = 0;
-    public $position = 0;
+    public $position = 1;
     public $color = '#ffffff';
     public $date_update = '0000-00-00 00:00:00';
 
