@@ -157,30 +157,42 @@ jQuery(document).ready( function($){
         $('.image_group').css('display', 'none');
         $('#image_url_group').css('display', 'block');
     });
+    var $count = 1;
     $addDetails.on('click', function(event){
         event.stopPropagation();
         var $count = $("#table_add_unit tr[id^=details_]").length;
-        if ($count == null) {
-            $count = 0;
+        if ($count <= 7) {        
+            $('<tr id="details_'+$count+'">'+
+                '<td colspan="1"></td>'+
+                '<td colspan="3">'+
+                    '<input type="text"  name="positive_details['+$count+']" value=""></input>'+
+                '</td>'+
+                '<td colspan="3">'+
+                    '<input type="text"  name="negative_details['+$count+']" value=""></input>'+
+                '</td>'+
+                '<td colspan="1"><i class="close-row icon-cancel-circled"></i></td>'+
+            '</tr>').insertBefore("tr.add-row");
+            if ($count >= 1) {
+                $('#tbody_details').children('tr#details_'+($count - 1)+'').children('td:last-child').html('');
+                closeRow($count);
+            }
         }
-        $('<tr id="details_'+$count+'">'+
-            '<td colspan="1"></td>'+
-            '<td colspan="3">'+
-                '<input type="text"  name="positive_details['+$count+']" value=""></input>'+
-            '</td>'+
-            '<td colspan="3">'+
-                '<input type="text"  name="negative_details['+$count+']" value=""></input>'+
-            '</td>'+
-            '<td colspan="1"><i class="close-row icon-cancel-circled"></i></td>'+
-        '</tr>').insertBefore("tr.add-row");
-        if ($count >= 1) {
-            $('#tbody_details').children('tr#details_'+($count - 1)+'').children('td:last-child').html('');
-        }
-        $('#details_'+$count+' .close-row').on('click', function(event){
+    });
+    function closeRow($numb) {
+        $('#tbody_details').on('click','#details_'+$numb+' .close-row', function(event){
             event.preventDefault();
             event.stopPropagation();
             $(this).parent().parent('tr').remove();
-            $('#tbody_details').children('tr#details_'+($count - 1)+'').children('td:last-child').html('<i class="close-row icon-cancel-circled"></i>');
+            if ($numb >= 3) {
+                $('#tbody_details').children('tr#details_'+($numb - 1)+'').children('td:last-child').html('<i class="close-row icon-cancel-circled"></i>');
+                $('#tbody_details').on('click','#details_'+($numb - 1)+' .close-row', function(event){
+                    event.preventDefault();
+                    event.stopPropagation();
+                    $(this).parent().parent('tr').remove();
+                    $('#tbody_details').children('tr#details_'+($numb - 2)+'').children('td:last-child').html('<i class="close-row icon-cancel-circled"></i>');
+                });
+            }
         });
-    });
+    }
+
 });
