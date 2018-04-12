@@ -115,6 +115,9 @@ class LythRankingCore
                     'error' => 'Url Post invalid'
                 )));
             }
+            $url_post = $_POST['url_post'];
+        } else {
+            $url_post = '0';
         }
         if (!isset($_POST['category']) || $_POST['category'] === '0' || !LythTools::isInt((int) $_POST['category'])) {
             die(json_encode(array(
@@ -128,29 +131,44 @@ class LythRankingCore
                 'error' => 'image invalid'
             )));
         }
-        if (!empty($_POST['positive_details'])) {
-            $positive_details = $_POST['positive_details'];
-            foreach ($positive_details as $key) {
-                if (!LythTools::isString($key)) {
-                    die(json_encode(array(
-                        'return' => false,
-                        'error' => 'Positive Details invalid'
-                    )));
-                }
+        if (!isset($_POST['positive_details']) || empty($_POST['positive_details'])) {
+            die(json_encode(array(
+                'return' => false,
+                'error' => 'Positive Details cant empty'
+            )));
+        }
+        for ($i=0; $i <= 8; $i++) {
+            if ($_POST['positive_details'][$i] == NULL) {
+                unset($_POST['positive_details'][$i]);
+            }
+            if ($_POST['negative_details'][$i] == NULL) {
+                unset($_POST['negative_details'][$i]);
             }
         }
-        if (!empty($_POST['negative_details'])) {
-            $negative_details = $_POST['negative_details'];
-            foreach ($negative_details as $key) {
-                if (!LythTools::isString($key)) {
-                    die(json_encode(array(
-                        'return' => false,
-                        'error' => 'Negative Details invalid'
-                    )));
-                }
+
+        if ($_POST['method'] == "add") {
+            $obj = new LythRankingSettings();
+            $obj->unit_rank = (int) $_POST['unit_rank'];
+            $obj->unit_name = (string) $_POST['unit_name'];
+            $obj->category = (int) $_POST['category'];
+            $obj->image_url = (string) $_POST['image_url'];
+            $obj->url_post = (string) $url_post;
+            $obj->positive_details = maybe_serialize($_POST['positive_details']);
+            $obj->negative_details = maybe_serialize($_POST['negative_details']);
+            $obj->date_update = (string) current_time("mysql");
+            if (!$obj->addUnit()) {
+                die(json_encode(array(
+                    'return' => false,
+                    'error' => 'Error to save'
+                )));
             }
+            die(json_encode(array(
+                'return' => true,
+                'message' => 'Add Unit Success'
+            )));
+        } elseif($_POST['method'] == "update") {
+            $obj = new LythRankingSettings();
         }
-        return true;
     }
 
     public static function getUnit($id_rank)
