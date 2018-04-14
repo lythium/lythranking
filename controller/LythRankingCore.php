@@ -182,6 +182,17 @@ class LythRankingCore
         }
         return $results;
     }
+    public static function getListRankByCategory($category)
+    {
+        global $wpdb;
+        $lythRanking_unit = $wpdb->prefix . 'lythranking';
+
+        $results = $wpdb->get_results("SELECT * FROM $lythRanking_unit WHERE category = '$category' ORDER BY unit_rank ASC", OBJECT);
+        if (!$results) {
+            $results = false;
+        }
+        return $results;
+    }
 
     public static function getListRank()
     {
