@@ -12,7 +12,7 @@
 }
 .lythrankingaddcategory th#field_0,
 .lythranking th#field_0 {
-    width: 5%!important;
+    width: 20px!important;
 }
 .lythrankingaddcategory th#field_3 {
     width: 10%!important;
@@ -170,7 +170,8 @@ div.alert-error {
 #category-list th {
     text-align: center;
 }
-#category-list .btn-group {
+#category-list .btn-group,
+#lythranking-list .btn-group {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -193,7 +194,8 @@ div.alert-error {
     text-align: center;
     padding: 0;
 }
-#category-list #update_btn{
+#category-list #update_btn,
+#lythranking-list #update_btn {
     border-radius: 5px 0 0 5px;
     width: 80%;
     text-align: center;
@@ -204,6 +206,7 @@ div.alert-error {
     border: 2px solid #cccccc;
     border-right: 0;
 }
+
 .btn-group .dropdown {
     position: absolute;
     top: 30px;
@@ -222,7 +225,8 @@ div.alert-error {
             align-items: center;
     width: 100%;
 }
-#category-list #delete_btn {
+#category-list #delete_btn,
+#lythranking-list #delete_btn {
     margin-left: auto;
     margin-right: auto;
     width: 100%;
@@ -390,4 +394,56 @@ input[name="unit_rank"] {
     border: 2px inset black!important;
     background-color: #d1d3fe!important;
     color: #333333!important;
+}
+#lythranking-list .icon-level-up {
+    margin-right: 10px;
+}
+.icon-level-up {
+    font-size: 16px;
+}
+#lythranking-list thead #field_1 {
+    width: 50px;
+}
+#lythranking-list thead #field_7 {
+    width: 15%;
+}
+#lythranking-list .icon-level-up::before {
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+}
+#lythranking-list tr.unit_category td {
+    text-align: left;
+    font-weight: 700;
+    color: #ffffff;
+    text-shadow: 0 0 1px #000000,0 0 1px #000000,0 0 1px #000000;
+    border-bottom: 1px solid #999999!important;
+    border-top: 1px solid #999999!important;
+}
+#lythranking-list td.details_unit {
+    text-align: left;
+}
+#lythranking-list td.details_unit ul {
+    list-style: disc;
+    margin-top: 0;
+    padding-left: 10px;
+}
+#lythranking-list tr.unit_category_child td {
+    text-align: left;
+    font-weight: 700;
+    border-bottom: 1px solid #999999!important;
+    border-top: 1px solid #999999!important;
+}
+#lythranking-list tr.unit td {
+    border-right: 1px solid #999999!important;
+    border-bottom: 1px solid #999999!important;
+}
+#lythranking-list tr.unit td:nth-child(1),
+#lythranking-list tr.unit td:nth-child(2),
+#lythranking-list tr.unit td:nth-child(3) {
+    font-weight: 700;
+    font-size: 16px;
+    text-align: center;
+}
+#lythranking-list tr.unit td:last-child {
+    border-right: 0!important;
 }
