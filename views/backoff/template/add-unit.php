@@ -14,29 +14,51 @@
             <tbody>
                 <tr>
                         <td colspan="1">
+                            <?php if (isset($_GET["button"]) && $_GET["button"] == 'update' && isset($_GET["id_rank"])): ?>
+                                <input type="hidden" name="method" value="update">
+                                <input type="hidden" name="id_rank" value="<?php echo $_GET["id_rank"] ?>">
+                                <?php $currentUnit = new LythRankingSettings($_GET["id_rank"]); ?>
+                                <?php $mode = 'update'; ?>
+                                <?php $unit_name = $currentUnit->unit_name; ?>
+                                <?php $category = $currentUnit->category; ?>
+                                <?php $unit_rank = $currentUnit->unit_rank; ?>
+                                <?php $image_url = $currentUnit->image_url; ?>
+                                <?php $url_post = $currentUnit->url_post; ?>
+                                <?php $positive_details = maybe_unserialize($currentUnit->positive_details); ?>
+                                <?php $negative_details = maybe_unserialize($currentUnit->negative_details); ?>
+                            <?php else: ?>
+                                <input type="hidden" name="method" value="add">
+                                <?php $mode = 'add'; ?>
+                                <?php $unit_name = 'Unit Name'; ?>
+                                <?php $unit_rank = 1; ?>
+                                <?php $category = 0; ?>
+                                <?php $image_url = ''; ?>
+                                <?php $url_post = 'Link Unit Post'; ?>
+                                <?php $positive_details = NULL; ?>
+                                <?php $negative_details = NULL; ?>
+                            <?php endif; ?>
                             <input type="hidden" name="method" value="add">
-                            <?php $mode = 'add'; ?>
                         </td>
                         <td colspan="1">
                             <div class="group-form-horizontal">
                                 <label for="unit_rank">#</label>
-                                <input type="number" name="unit_rank" value="1" placeholder="1" pattern="[0-9]" min="1">
+                                <input type="number" name="unit_rank" value="<?php echo $unit_rank ?>" placeholder="<?php echo $unit_rank ?>" pattern="[0-9]" min="1">
                             </div>
                         </td>
                         <td colspan="2">
                             <div class="group-form-horizontal">
-                                <input type="text" name="unit_name" value="" placeholder="Unit Name">
-                                <input id="url_post" type="text" name="url_post" value="" placeholder="Link Unit Post">
+                                <input type="text" name="unit_name" value="<?php echo $unit_name ?>" placeholder="<?php echo $unit_name ?>">
+                                <input id="url_post" type="text" name="url_post" value="<?php echo $url_post ?>" placeholder="<?php echo $url_post ?>">
                             </div>
                         </td>
                         <td colspan="1"></td>
                         <td>
-                            <div class="form-group" id="image_url_group">
+                            <div class="form-group" id="image_url_group" style="<?php if($image_url) echo 'display:none;'; ?>">
                                 <input type="hidden" name="image_url" id="image_url" class="text" value="">
                                 <input type="button" name="upload-btn" id="upload-btn" class="button-secondary" value="Upload Image">
                             </div>
-                            <div class="image_group">
-                                <img  src="" alt="" id="upload_image">
+                            <div class="image_group" style="<?php if($image_url) echo 'display:flex;'; ?>">
+                                <img  src="<?php echo $image_url ?>" alt="" id="upload_image">
                                 <a href="" id="close_upload"><i class="icon-cancel-circled"></i></a>
                             </div>
                         </td>
@@ -49,7 +71,7 @@
                                         <?php $resultsChildren = LythRankingCore::getChildrenCategory($cat->id_category) ?>
                                         <?php if ($resultsChildren): ?>
                                             <?php foreach ($resultsChildren as $child): ?>
-                                                <option value="<?php echo $child->id_category ?>" > » <?php echo $child->name ?></option>
+                                                <option <?php if ($category == $child->id_category) echo "selected";?> value="<?php echo $child->id_category ?>" > » <?php echo $child->name ?></option>
                                             <?php endforeach; ?>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
@@ -70,16 +92,52 @@
                 </tr>
             </thead>
             <tbody id="tbody_details">
-                <tr id="details_0">
-                    <td colspan="1"></td>
-                    <td colspan="3">
-                        <input type="text"  name="positive_details[0]" value=""></input>
-                    </td>
-                    <td colspan="3">
-                        <input type="text"  name="negative_details[0]" value=""></input>
-                    </td>
-                    <td colspan="1"></td>
-                </tr>
+                <?php if ($positive_details): ?>
+                    <?php $countPos = count($positive_details); ?>
+                    <?php $countNeg = count($negative_details); ?>
+                    <?php if ($countNeg > $countPos): ?>
+                        <?php $count = $countNeg; ?>
+                    <?php else: ?>
+                        <?php $count = $countPos; ?>
+                    <?php endif; ?>
+                    <?php for ($i=0; $i < $count; $i++) { ?>
+                        <tr id="details_<?php echo $i?>">
+                            <td colspan="1"></td>
+                            <td colspan="3">
+                                <?php if (isset($positive_details[$i])): ?>
+                                    <?php $currentPositive = $positive_details[$i]; ?>
+                                <?php else: ?>
+                                    <?php $currentPositive = ''; ?>
+                                <?php endif; ?>
+                                <input type="text"  name="positive_details[<?php echo $i?>]" value="<?php echo $currentPositive?>" placeholder="<?php echo $currentPositive?>"></input>
+                            </td>
+                            <td colspan="3">
+                                <?php if (isset($negative_details[$i])): ?>
+                                    <?php $currentNegative = $negative_details[$i]; ?>
+                                <?php else: ?>
+                                    <?php $currentNegative = ''; ?>
+                                <?php endif; ?>
+                                <input type="text"  name="negative_details[<?php echo $i?>]" value="<?php echo $currentNegative?>" placeholder="<?php echo $currentNegative?>"></input>
+                            </td>
+                            <td colspan="1">
+                            <?php if ($i > 0): ?>
+                                <i class="close-row icon-cancel-circled">
+                            <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php } ?>
+                <?php else: ?>
+                    <tr id="details_0">
+                        <td colspan="1"></td>
+                        <td colspan="3">
+                            <input type="text"  name="positive_details[0]" value=""></input>
+                        </td>
+                        <td colspan="3">
+                            <input type="text"  name="negative_details[0]" value=""></input>
+                        </td>
+                        <td colspan="1"></td>
+                    </tr>
+                <?php endif; ?>
                 <tr class="add-row">
                     <td colspan="8">
                         <div class="group-form-horizontal">
