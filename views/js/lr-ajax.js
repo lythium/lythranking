@@ -161,7 +161,7 @@ jQuery(document).ready( function($){
     $addDetails.on('click', function(event){
         event.stopPropagation();
         var $count = $("#table_add_unit tr[id^=details_]").length;
-        if ($count <= 7) {        
+        if ($count <= 7) {
             $('<tr id="details_'+$count+'">'+
                 '<td colspan="1"></td>'+
                 '<td colspan="3">'+
@@ -193,6 +193,11 @@ jQuery(document).ready( function($){
                 });
             }
         });
+    }
+    var $countUpdate = $("#table_add_unit tr[id^=details_]").length;
+    for (var i = 1; i < $countUpdate; i++) {
+        console.log(i);
+        closeRow(i);
     }
 
 });
