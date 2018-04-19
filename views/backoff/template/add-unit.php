@@ -33,11 +33,10 @@
                                 <?php $unit_rank = 1; ?>
                                 <?php $category = 0; ?>
                                 <?php $image_url = ''; ?>
-                                <?php $url_post = 'Link Unit Post'; ?>
+                                <?php $url_post = ''; ?>
                                 <?php $positive_details = NULL; ?>
                                 <?php $negative_details = NULL; ?>
                             <?php endif; ?>
-                            <input type="hidden" name="method" value="add">
                         </td>
                         <td colspan="1">
                             <div class="group-form-horizontal">
@@ -48,13 +47,13 @@
                         <td colspan="2">
                             <div class="group-form-horizontal">
                                 <input type="text" name="unit_name" value="<?php echo $unit_name ?>" placeholder="<?php echo $unit_name ?>">
-                                <input id="url_post" type="text" name="url_post" value="<?php echo $url_post ?>" placeholder="<?php echo $url_post ?>">
+                                <input id="url_post" type="text" name="url_post" value="<?php echo $url_post ?>" placeholder="<?php if($url_post != '') echo $url_post; else echo 'Url Post Unit';?>">
                             </div>
                         </td>
                         <td colspan="1"></td>
                         <td>
                             <div class="form-group" id="image_url_group" style="<?php if($image_url) echo 'display:none;'; ?>">
-                                <input type="hidden" name="image_url" id="image_url" class="text" value="">
+                                <input type="hidden" name="image_url" id="image_url" class="text" value="<?php echo $image_url ?>">
                                 <input type="button" name="upload-btn" id="upload-btn" class="button-secondary" value="Upload Image">
                             </div>
                             <div class="image_group" style="<?php if($image_url) echo 'display:flex;'; ?>">

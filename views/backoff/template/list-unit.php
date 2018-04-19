@@ -35,9 +35,20 @@
                         <?php if ($results_units): ?>
                             <?php foreach ($results_units as $unit): ?>
                                 <tr class="unit">
-                                    <td><?php echo $unit->id_rank ?></td>
-                                    <td>#<?php echo $unit->unit_rank ?></td>
-                                    <td><?php echo $unit->unit_name ?></td>
+                                    <td><?php echo $unit->id_rank; ?></td>
+                                    <td>#<?php echo $unit->unit_rank; ?></td>
+                                    <td>
+                                        <?php echo $unit->unit_name; ?>
+                                        <br>
+                                        <?php if ($unit->url_post != ''): ?>
+                                            <a href="<?php echo $unit->url_post; ?>">
+                                                <?php $countString = strlen($unit->url_post); ?>
+                                                <?php echo substr($unit->url_post, 0, 23).'...'.substr($unit->url_post, $countString - 15); ?>
+                                            </a>
+                                        <?php else: ?>
+                                            <span style="font-weight:normal;">Url Post Empty</span>
+                                        <?php endif; ?>
+                                    </td>
                                     <td>
                                         <div class="image_group" style="display:flex;">
                                             <img src="<?php echo $unit->image_url ?>" alt="" id="upload_image">
@@ -70,7 +81,7 @@
                                                 <button id="update_btn" type="submit" class="btn btn-info" name="button" value="update"></i><span class="icon_text">Update</span></button>
                                                 <button class="btn-drop" type="button" name="button"><i class="icon-down-open"></i></button>
                                                 <div class="dropdown">
-                                                    <button id="delete_btn" type="submit" class="btn btn-info" name="button" value="delete"></i><span class="icon_text">Delete</span></button>
+                                                    <button id="delete_btn" type="submit" class="btn btn-info" name="button" value="delete_unit"></i><span class="icon_text">Delete</span></button>
                                                 </div>
                                             </div>
                                         </form>

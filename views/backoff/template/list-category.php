@@ -22,7 +22,7 @@
                         <button id="update_btn" type="submit" class="btn btn-info" name="button" value="update"></i><span class="icon_text">Update</span></button>
                         <button class="btn-drop" type="button" name="button"><i class="icon-down-open"></i></button>
                         <div class="dropdown">
-                            <button id="delete_btn" type="submit" class="btn btn-info" name="button" value="delete"></i><span class="icon_text">Delete</span></button>
+                            <button id="delete_btn" type="submit" class="btn btn-info" name="button" value="delete_category"></i><span class="icon_text">Delete</span></button>
                         </div>
                     </div>
                 </form>

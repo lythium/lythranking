@@ -4,7 +4,8 @@
             $obj_delete = new LythRankingSettingsCategory($_GET['id_category']);
             $obj_delete->deleteCategory();
         } elseif ($_GET["button"] === "delete_unit" && !empty($_GET['id_rank'])) {
-
+            $unit_delete = new LythRankingSettings($_GET['id_rank']);
+            $unit_delete->deleteUnit();
         }
     }
  ?>
@@ -53,8 +54,8 @@
     </section>
 
     <section id="section-2">
-        <button id="form_unit" type="button" name="button">Add Unit</button>
-        <div id="table_add_unit">
+        <button id="form_unit" type="button" name="button" style="<?php if (isset($_GET['button']) && $_GET['button'] == 'update' ) echo 'display:none;'; ?>">Add Unit</button>
+        <div id="table_add_unit" style="<?php if (isset($_GET['button']) && $_GET['button'] == 'update' ) echo 'display:block;'; ?>">
             <?php include_once plugin_dir_path(__FILE__).'template/add-unit.php'; ?>
         </div>
     </section>
