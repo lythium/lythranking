@@ -167,7 +167,37 @@ class LythRankingCore
                 'message' => 'Add Unit Success'
             )));
         } elseif($_POST['method'] == "update") {
-            $obj = new LythRankingSettings();
+            if (!isset($_POST['id_rank']) && !LythTools::isInt((int) $_POST['id_rank'])) {
+                die(json_encode(array(
+                    'return' => false,
+                    'error' => 'Error Id_rank'
+                )));
+            }
+            $obj = new LythRankingSettings($_POST['id_rank']);
+            $obj->unit_rank = (int) $_POST['unit_rank'];
+            $obj->unit_name = (string) $_POST['unit_name'];
+            $obj->category = (int) $_POST['category'];
+            $obj->image_url = (string) $_POST['image_url'];
+            $obj->url_post = (string) $url_post;
+            $obj->positive_details = maybe_serialize($_POST['positive_details']);
+            $obj->negative_details = maybe_serialize($_POST['negative_details']);
+            $obj->date_update = (string) current_time("mysql");
+
+            if (!$obj->updateUnit()) {
+                die(json_encode(array(
+                    'return' => false,
+                    'error' => 'Error to update'
+                )));
+            }
+            die(json_encode(array(
+                'return' => true,
+                'message' => 'Update Unit Success'
+            )));
+        } else {
+            die(json_encode(array(
+                'return' => false,
+                'error' => 'Method Error'
+            )));
         }
     }
 
