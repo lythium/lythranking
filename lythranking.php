@@ -35,6 +35,10 @@ class LythRanking
                 add_action('admin_enqueue_scripts', array($this, 'lythranking_scripts_admin' ));
             }
         }
+        // css & js front
+        add_action('wp_enqueue_scripts', array($this, 'lythranking_scripts_front' ));
+        // add shortcode
+        add_shortcode('LythRanking', array($this, 'lythranking_shortcode'));
 
         include_once plugin_dir_path(__FILE__).'controller/LythTools.php';
         new LythTools();
@@ -165,6 +169,16 @@ class LythRanking
          $wp_admin_bar->add_node($args);
     }
 
+    public function lythranking_shortcode()
+    {
+        include_once(ABSPATH . 'wp-admin/includes/plugin.php');
+        // new LythRankingCore();
+        // $multiList = LythRankingCore::getListFront();
+        ob_start();
+        include plugin_dir_path(__FILE__).'views/front/listing.php';
+		return ob_get_clean();
+    }
+
     static function lythranking_scripts_admin()
     {
         // Ajax
@@ -174,6 +188,13 @@ class LythRanking
         // CSS
         wp_register_style( 'lythrankingadmincss', get_site_url() . '/wp-content/plugins/lythranking/views/css/lr_admin_style.css' );
         wp_enqueue_style( 'lythrankingadmincss' );
+    }
+    static function lythranking_scripts_front()
+    {
+        wp_register_style( 'lythrankingcss', get_site_url() . '/wp-content/plugins/lythranking/views/css/lr_front_style.css' );
+        wp_enqueue_style( 'lythrankingcss' );
+        wp_enqueue_script( 'lythrankingjs', get_site_url() . '/wp-content/plugins/lythranking/views/js/lr-front.js', array(), false, true );
+        wp_enqueue_script( 'lythframejs' );
     }
 
     static function lythRankingList()
