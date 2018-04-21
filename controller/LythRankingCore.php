@@ -117,7 +117,7 @@ class LythRankingCore
             }
             $url_post = $_POST['url_post'];
         } else {
-            $url_post = '0';
+            $url_post = '';
         }
         if (!isset($_POST['category']) || $_POST['category'] === '0' || !LythTools::isInt((int) $_POST['category'])) {
             die(json_encode(array(
