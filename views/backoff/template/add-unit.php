@@ -29,7 +29,7 @@
                             <?php else: ?>
                                 <input type="hidden" name="method" value="add">
                                 <?php $mode = 'add'; ?>
-                                <?php $unit_name = 'Unit Name'; ?>
+                                <?php $unit_name = ''; ?>
                                 <?php $unit_rank = 1; ?>
                                 <?php $category = 0; ?>
                                 <?php $image_url = ''; ?>
@@ -46,7 +46,7 @@
                         </td>
                         <td colspan="2">
                             <div class="group-form-horizontal">
-                                <input type="text" name="unit_name" value="<?php echo $unit_name ?>" placeholder="<?php echo $unit_name ?>">
+                                <input type="text" name="unit_name" value="<?php echo $unit_name ?>" placeholder="<?php if($unit_name != '') echo $unit_name; else echo 'Unit Name';?>">
                                 <input id="url_post" type="text" name="url_post" value="<?php echo $url_post ?>" placeholder="<?php if($url_post != '') echo $url_post; else echo 'Url Post Unit';?>">
                             </div>
                         </td>
