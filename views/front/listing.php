@@ -8,7 +8,7 @@
                     <?php if ($catParent === reset($mainCategory)): ?>
                         <?php $activeMenu = 'active-menu'; ?>
                     <?php endif; ?>
-                    <li id="<?php echo $catParent->name ?>" style="background-color:<?php echo $catParent->color ?>;" data="lr-tab" class="<?php echo $activeMenu ?>">
+                    <li id="<?php echo str_replace(' ', '_', $catParent->name) ?>" style="background-color:<?php echo $catParent->color ?>;" data="lr-tab" class="<?php echo $activeMenu ?>">
                         <span><?php echo $catParent->name ?></span>
                     </li>
                 <?php endforeach; ?>
@@ -18,7 +18,10 @@
                 <?php if ($catParent === reset($mainCategory)): ?>
                     <?php $active = 'active'; ?>
                 <?php endif; ?>
-                <section id="<?php echo $catParent->name ?>" class="<?php echo $active ?>">
+                <section id="<?php echo str_replace(' ', '_', $catParent->name) ?>" class="<?php echo $active ?>">
+                    <div class="icon-row">
+                        <i class="icon-right-open icon-section"></i>
+                    </div>
                     <div class="lr-menu-cat">
                         <ul class="lr-sub-nav">
                             <?php $childCategory = LythRankingCore::getChildrenCategory($catParent->id_category); ?>
@@ -28,7 +31,7 @@
                                     <?php if ($child === reset($childCategory)): ?>
                                         <?php $activeMenu = 'active-menu'; ?>
                                     <?php endif; ?>
-                                    <li id="<?php echo $child->name ?>" style="background-color:<?php echo $child->color ?>;" data="lr-sub-tab" class="<?php echo $activeMenu ?>">
+                                    <li id="<?php echo str_replace(' ', '_', $child->name) ?>" style="background-color:<?php echo $child->color ?>;" data="lr-sub-tab" class="<?php echo $activeMenu ?>">
                                         <span><?php echo $child->name ?></span>
                                     </li>
                                 <?php endforeach; ?>
@@ -40,18 +43,18 @@
                                 <?php if ($child === reset($childCategory)): ?>
                                     <?php $active = 'active'; ?>
                                 <?php endif; ?>
-                                <div id="<?php echo $child->name ?>" class="lr-sub-cat <?php echo $active ?>">
-                                    <h3 class="lr-title-child-cat">Classement Brave exvius : <?php echo $child->name ?></h3>
+                                <div id="<?php echo str_replace(' ', '_', $child->name) ?>" class="lr-sub-cat <?php echo $active ?>">
+                                    <i class="icon-right-open icon-title-left"></i><h3 class="lr-title-child-cat">Classement Brave exvius : <?php echo $child->name ?></h3><i class="icon-right-open icon-title-right"></i>
                                     <?php $units = LythRankingCore::getListRankByCategory($child->id_category); ?>
                                     <?php if ($units): ?>
                                         <?php foreach ($units as $unit): ?>
                                             <div class="lr-unit">
                                                 <div class="lr-title-unit">
                                                     <div class="lr-unit-rank">
-                                                        <span># <?php echo $unit->unit_rank ?></span>
+                                                        <span><i class="icon-hashtag"></i><?php echo $unit->unit_rank ?></span>
                                                     </div>
                                                     <div class="lr-unit-name">
-                                                        <span><?php echo $unit->unit_name ?></span>
+                                                        <h3><?php echo $unit->unit_name ?></h3>
                                                     </div>
                                                     <div class="lr-url">
                                                         <?php if ($unit->url_post): ?>
@@ -72,7 +75,7 @@
                                                                 <?php $positiveDetails = maybe_unserialize($unit->positive_details); ?>
                                                                 <?php if ($positiveDetails): ?>
                                                                     <?php foreach ($positiveDetails as $positiveRow): ?>
-                                                                        <li><?php echo $positiveRow ?></li>
+                                                                        <li><i class="icon-right-open"></i> <?php echo $positiveRow ?></li>
                                                                     <?php endforeach; ?>
                                                                 <?php endif; ?>
                                                             </ul>
@@ -82,7 +85,7 @@
                                                                 <?php $negativeDetails = maybe_unserialize($unit->negative_details); ?>
                                                                 <?php if ($negativeDetails): ?>
                                                                     <?php foreach ($negativeDetails as $negativeRow): ?>
-                                                                        <li><?php echo $negativeRow ?></li>
+                                                                        <li><i class="icon-right-open"></i> <?php echo $negativeRow ?></li>
                                                                     <?php endforeach; ?>
                                                                 <?php endif; ?>
                                                             </ul>
