@@ -92,8 +92,6 @@ class LythRankingSettingsCategory
         $current[0]->date_update = $this->date_update;
 
         $resOrder = array_merge(array_slice($results, 0, $indexPos, true), $current, array_slice($results, $indexPos, null, true));
-        // LythTools::array_object_orderby($res, 'position', SORT_ASC);
-        // return $resOrder;
 
         $reIndex = 1;
         foreach ($resOrder as $row) {
@@ -108,7 +106,6 @@ class LythRankingSettingsCategory
             if (!$wpdb->update("$lythRanking_category", $args, array('id_category' => $row->id_category), array( '%s', '%d', '%d', '%s', '%s'), array('%d'))) {
                 return false;
             };
-
             $reIndex++;
         };
         return true;

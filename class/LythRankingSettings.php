@@ -97,8 +97,6 @@ class LythRankingSettings
         $current[0]->date_update = $this->date_update;
 
         $resOrder = array_merge(array_slice($results, 0, $indexPos, true), $current, array_slice($results, $indexPos, null, true));
-        // LythTools::array_object_orderby($res, 'unit_rank', SORT_ASC);
-        // return $resOrder;
 
         $reIndex = 1;
         foreach ($resOrder as $row) {
@@ -148,7 +146,6 @@ class LythRankingSettings
                 if (!$wpdb->update("$lythRanking_unit", $args, array('id_rank' => $row->id_rank), array( '%d', '%s', '%d', '%s', '%s', '%s', '%s', '%s'), array('%d'))) {
                     return false;
                 };
-
                 $reIndex++;
             };
         }
