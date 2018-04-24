@@ -23,7 +23,7 @@ class LythRanking
         $this->plugin               = new stdClass;
         $this->plugin->name         = 'lythframe'; // Plugin Folder
         $this->plugin->displayName  = 'LythFrame'; // Plugin Name
-        $this->plugin->version      = '1.0.1';
+        $this->plugin->version      = '1.1.0';
         $this->plugin->folder       = plugin_dir_path(__FILE__);
         $this->plugin->url          = plugin_dir_url(__FILE__);
 
